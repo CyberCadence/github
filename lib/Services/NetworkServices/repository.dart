@@ -11,15 +11,16 @@ class Repository{
 
 
 
-Future<List<Modeldata>?> getdata()async{
+   Future<List<Modeldata>?> getdataApi()async{
   List <Modeldata> collections=[];
 
-const Url='https://api.github.com/search/repositories?q=created:%3E2022-04-29&sort=stars&order=desc';
+const url=
+'https://api.github.com/search/repositories?q=created:%3E2022-04-29&sort=stars&order=desc';
 
 try {
 
 
- http.Response response= await http.get(Uri.parse(Url));
+ http.Response response= await http.get(Uri.parse(url));
 
    if(response.statusCode==200){
 
@@ -32,7 +33,7 @@ try {
 
 Modeldata modeldata=Modeldata.fromMap(value);
 collections.add(modeldata);
-    print(collections);
+    
 
     }return collections;
 
