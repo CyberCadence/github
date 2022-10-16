@@ -34,10 +34,10 @@ final String avatar_url;
       
       'stars': stars,
       'username': username,
-      'image': avatar_url,
+      'avatar_url': avatar_url,
     };
   }
-
+  
   factory Modeldata.fromMap(Map<String, dynamic> map) {
     return Modeldata(
 

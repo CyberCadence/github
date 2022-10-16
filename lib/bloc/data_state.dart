@@ -16,7 +16,8 @@ class LoadedState extends ModelState {
 
 
 class Errorstate extends ModelState {
-
+  final String message;
+Errorstate({required this.message});
   
 }
 class LoadDBData extends ModelState{

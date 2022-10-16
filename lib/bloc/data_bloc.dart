@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:github/Services/Database/dbservice.dart';
+import 'package:github/Services/Services/repository.dart';
+import 'package:github/Services/dbservice.dart';
 import 'package:github/model/Modeldata.dart';
- 
 
-import '../Services/NetworkServices/repository.dart';
 
 part 'data_event.dart';
 part 'data_state.dart';
@@ -12,34 +11,27 @@ class ModelBloc extends Bloc<ModelEvent, ModelState> {
   final Repository repo;
   ModelBloc({required this.repo}) : super(ModelInitialstate()) {
     on<ModelEvent>((event, emit) async {
-
-
-      if (event is LoaddataEvent ) {
+      if (event is LoaddataEvent) {
         emit(ModelLoadingstate());
 
         List<Modeldata>? modelclass = await repo.getdataApi();
-        List<Modeldata>? dbdata=await getallDBdata();
+        //  List<Modeldata>? dbdata=await getallDBdata();
         if (modelclass == null) {
-
-
-emit(Errorstate());
+          emit(Errorstate(message: 'please check network'));
           // emit( LoadDBData(modeldata: dbdata));
         } else {
           emit(LoadedState(modelclass: modelclass));
         }
 
-if(dbdata==null){
+// if(dbdata==null){
 
-emit(Errorstate());
+// emit(Errorstate());
 
-}else{
+// }else{
 
+// emit(LoadDBData(modeldata: dbdata));
 
-emit(LoadDBData(modeldata: dbdata));
-
-
-
-}
+// }
       }
     });
   }
